@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model BookListViewModel 
+
+<div class="text-center">
+    <h5>Please peruse our premium, hand-picked selection of literary works.</h5>
+</div>
+<br />
+<br />
+<div class="grid-container">
+    @foreach (var x in Model.Books)
+    {
+        <div class="grid-item">
+            <h5>@x.Title</h5>
+            <p>Author: @x.AuthorFName @x.AuthorLName</p>
+            <p>Publisher: @x.Publisher</p>
+            <p>ISBN: @x.ISBN</p>
+            <p>Classification/Category: @x.Classification, @x.Category</p>
+            <p>Page Count: @x.PageNumber</p>
+            <p>$@x.Price</p>
+        </div>
+     }
+</div>
+
+<div class="hidden-element">
+    <p>Hidden element</p>
+</div>
+
+<!--Uses page model helpers-->
+<div page-model="@Model.PagingInfo" page-action="Index"page-classes-enabled="true" page-class="btn" 
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group m-1"></div>
+
