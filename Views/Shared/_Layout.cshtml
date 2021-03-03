@@ -29,10 +29,15 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="main-body">
+        <div class="main-body-element nav-bar">
+            <vc:navigation-menu />
+        </div>
+        <div class="main-body-element container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">

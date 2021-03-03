@@ -87,6 +87,15 @@ body {
     background: #f3f3f3;
 }
 
+.main-body {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+.nav-bar{
+    padding: 20px;
+}
+
 .hidden-element {
     color: #ffffff;
     text-align: right;

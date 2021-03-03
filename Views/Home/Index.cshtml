@@ -12,15 +12,7 @@
 <div class="grid-container">
     @foreach (var x in Model.Books)
     {
-        <div class="grid-item">
-            <h5>@x.Title</h5>
-            <p>Author: @x.AuthorFName @x.AuthorLName</p>
-            <p>Publisher: @x.Publisher</p>
-            <p>ISBN: @x.ISBN</p>
-            <p>Classification/Category: @x.Classification, @x.Category</p>
-            <p>Page Count: @x.PageNumber</p>
-            <p>$@x.Price</p>
-        </div>
+        <partial name="BookSummary" model="x" />
      }
 </div>
 
@@ -30,5 +22,6 @@
 
 <!--Uses page model helpers-->
 <div page-model="@Model.PagingInfo" page-action="Index"page-classes-enabled="true" page-class="btn" 
-     page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group m-1"></div>
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
+     class="btn-group m-1"></div>
 

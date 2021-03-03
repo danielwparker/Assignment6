@@ -55,10 +55,28 @@ namespace Euphrates
 
             app.UseEndpoints(endpoints =>
             {
+                //Creates URL for cat and page routing
+                endpoints.MapControllerRoute("catpage",
+                    "{category}/P{page:int}",
+                    new { Controller = "Home", action = "Index" }
+                    );
+
+                //Creates URL for page routing
+                endpoints.MapControllerRoute("page",
+                    "P{page:int}",
+                    new { Controller = "Home", action = "Index" }
+                    );
+
+                //Creates URL for cat routing
+                endpoints.MapControllerRoute("category",
+                    "{category}",
+                    new { Controller = "Home", action = "Index" , page = 1}
+                    );
+
                 //Allows for cleaner urls
                 endpoints.MapControllerRoute(
                     "pagination",
-                    "Books/P{page}",
+                    "P{page}",
                     new { Controller = "Home", action = "Index" });
                 endpoints.MapDefaultControllerRoute();
             });

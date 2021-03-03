@@ -1,0 +1,18 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{}
+
+
+@model Book
+
+    <div class="grid-item">
+        <h5>@Model.Title</h5>
+        <p>Author: @Model.AuthorFName @Model.AuthorLName</p>
+        <p>Publisher: @Model.Publisher</p>
+        <p>ISBN: @Model.ISBN</p>
+        <p>Classification/Category: @Model.Classification, @Model.Category</p>
+        <p>Page Count: @Model.PageNumber</p>
+        <p>$@Model.Price</p>
+    </div>
+
