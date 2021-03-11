@@ -83,10 +83,6 @@ body {
     margin:auto;
 }
 
-.grid-item:hover {
-    background: #f3f3f3;
-}
-
 .main-body {
     display: grid;
     grid-template-columns: 1fr 5fr;
