@@ -1,6 +1,7 @@
 using Euphrates.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,9 +29,17 @@ namespace Euphrates
             services.AddControllersWithViews();
             services.AddDbContext<BookDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:EuphratesBooksConnection"]);
+                options.UseSqlite(Configuration["ConnectionStrings:EuphratesBooksConnection"]);
             });
             services.AddScoped<IBookRepository, EFBookRepository>();
+
+            services.AddRazorPages();
+
+            //Allow for use of session
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +57,9 @@ namespace Euphrates
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            //Needed for using a session
+            app.UseSession();
 
             app.UseRouting();
 
@@ -79,6 +91,8 @@ namespace Euphrates
                     "P{page}",
                     new { Controller = "Home", action = "Index" });
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
             SeedData.EnsurePopulated(app);
         }
